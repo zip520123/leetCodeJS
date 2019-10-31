@@ -10,12 +10,17 @@
             "name": "strStr",
             "program": "${workspaceFolder}/string/strStr.js"
         },
-    
         {
             "type": "node",
             "request": "launch",
             "name": "Launch node atoi Program",
             "program": "${workspaceFolder}/string/atoi.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "single num",
+            "program": "${workspaceFolder}/array/singleNum.js"
         }
     ]
 }

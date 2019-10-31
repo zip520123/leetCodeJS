@@ -24,6 +24,26 @@ For the purpose of this problem, we will return 0 when needle is an empty string
 */
 var strStr = function(haystack, needle) {
     if (needle == "") return 0
+
+    if (needle.length > haystack) return -1
+    //for each index find haystack first char == needle first char
+    
+    for (let i = 0; i < haystack.length; i+=1) {
+        if (haystack[i] == needle[0]) {
+            if (haystack.substr(i,needle.length) == needle) return i
+
+        }
+    }
+    return -1
+    // haystack[index] ~ needle length  == needle
+    //  return index
+    // return -1
+    
+};
+console.log(strStr("hello", "ll") == 2)
+console.log(strStr("aaaaa", "bba") == -1)
+
+/*    if (needle == "") return 0
     var i = 0
     if (haystack.length >= needle.length) {
         while (i < haystack.length) {
@@ -36,7 +56,4 @@ var strStr = function(haystack, needle) {
             i += 1
         }
     }
-    return -1
-};
-console.log(strStr("hello", "ll") == 2)
-console.log(strStr("aaaaa", "bba") == -1)
+    return -1*/
