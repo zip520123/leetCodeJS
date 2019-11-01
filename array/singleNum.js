@@ -40,13 +40,25 @@ Output: 4
 // };
 
 // set
+// var singleNumber = function(nums) {
+//     // set(nums) * 2 - nums
+//     let set = new Set(nums)
+//     let arr1 = [...set].reduce((p,c) => {return p + c})
+//     let arr2 = nums.reduce((p,c) => {return p + c})
+//     return 2 * arr1 - arr2
+// }
+
+// bit
+// a XOR 0 = a
+// a XOR a = 0
 var singleNumber = function(nums) {
-    // set(nums) * 2 - nums
-    let set = new Set(nums)
-    let arr1 = [...set].reduce((p,c) => {return p + c})
-    let arr2 = nums.reduce((p,c) => {return p + c})
-    return 2 * arr1 - arr2
+    a = 0
+    nums.forEach((n) => {
+        a ^= n
+    })
+    return a
 }
+
 console.log(singleNumber([2,2,1]) == 1)
 console.log(singleNumber([1,0,1]) == 0)
 console.log(singleNumber([4,1,2,1,2]) == 4)
