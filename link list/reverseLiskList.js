@@ -21,10 +21,12 @@ A linked list can be reversed either iteratively or recursively. Could you imple
  * @return {ListNode}
  */
 var reverseList = function(head) {
+    //store prev curr
     var prev = null
     var curr = head
-
-    while(curr != null) {
+    // while curr != null 
+    while (curr != null) {
+        //  store temp curr.next
         var temp = curr.next
         curr.next = prev
         prev = curr
