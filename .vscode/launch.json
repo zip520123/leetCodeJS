@@ -21,6 +21,12 @@
             "request": "launch",
             "name": "single num",
             "program": "${workspaceFolder}/array/singleNum.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "B Tree Order Traversal",
+            "program": "${workspaceFolder}/tree/Binary Tree Level Order Traversal Solution.js"
         }
     ]
 }
