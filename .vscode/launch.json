@@ -34,7 +34,13 @@
             "request": "launch",
             "name": "Best Time to Buy and Sell Stock",
             "program": "${workspaceFolder}/Dynamic Programming/Best Time to Buy and Sell Stock.js"
-        }
+        },
+        {
+          "type": "node",
+          "request": "launch",
+          "name": "Count Primes",
+          "program": "${workspaceFolder}/Math/Count Primes.js"
+      },
         
     ]
 }
