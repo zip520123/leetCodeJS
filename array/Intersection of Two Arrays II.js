@@ -26,25 +26,26 @@ What if elements of nums2 are stored on disk, and the memory is limited such tha
  * @return {number[]}
  */
 var intersect = function(nums1, nums2) {
-  let dic = {}
-  //map
-  //nums1 forEach map push
-  //nums2 forEach map find 
-  for(let i = 0; i < nums1.length; i+=1){
-      value = nums1[i]
-      if (dic[value] == null){
-        dic[value] = 1    
-      }else{
-        dic[value]++
-      }
-  }
-  let result = []
-  for(let i=0; i < nums2.length; i+=1){
-      value = nums2[i]
-      if (dic[value] > 0){
-          result.push(value)
-          dic[value]--
-      }
-  }
-  return result
+  //dict
+  let dict = {}
+  //nums1 forEach n
+  nums1.forEach(n => {
+    // if dict[n] == null
+    dict[n] == null ? dict[n] = 1 : dict[n]+=1
+  //  dict[n] = 1
+  // else dict[n]++
+  })
+  let res = []
+  //res = []
+  nums2.forEach(n => {
+    //nums2 forEach n
+    if (dict[n] > 0){
+      res.push(n)
+      dict[n]--
+    }
+  // if dict[n] > 0
+  //  res.push(n)
+  //  dict[n]--
+  })
+  return res
 };
