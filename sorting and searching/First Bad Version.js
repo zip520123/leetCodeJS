@@ -36,16 +36,18 @@ var solution = function(isBadVersion) {
      * @return {integer} The first bad version
      */
     return function(n) {
-        left = 0
-        right = n
-        while(right - left !== 1){
-          // mid = (left + right) / 2
-          mid = parseInt((left + right) / 2) 
-          // if isBadVersion(mid) == true
-          //  right = mid
-          // else left = mid
+        //left = 0
+        let left = 0
+        //right = n
+        let right = n
+        //while(right - left != 1)
+        while(right - left != 1){
+          // mid = (left + right) / 2 | 0
+          let mid = (left + right) / 2 | 0
+        // isBadVersion(mid) ? right = mid : left = mid
           isBadVersion(mid) ? right = mid : left = mid
         }
+        //return right
         return right
     };
 };
