@@ -52,7 +52,6 @@ var isSymmetric = function(root) {
       }
     }
     let temp2 = temp.splice(0,temp.length / 2).reverse()
-    // console.log(temp,temp2)
     for(i=0;i<temp.length;i++){
       if (temp[i] == null && temp2[i] != null) return false
       if (temp[i] != null && temp2[i] == null) return false
@@ -62,3 +61,32 @@ var isSymmetric = function(root) {
   }
   return true
 };
+
+var isSymmetric = function(root) {
+  //nodes = [root,root]
+    let nodes = [root,root]
+  //while(nodes.length > 0)
+    while(nodes.length > 0){
+  // node1 = nodes.pop()
+      let node1 = nodes.pop()
+  // node2 = nodes.pop()
+      let node2 = nodes.pop()
+  // if node1 == null && node2 == null continue
+      if (node1 == null && node2 == null) continue
+  // if node1 == null || node2 == null return false
+      if (node1 == null || node2 == null) return false
+  // if node1.val != node2.val return false
+      if (node1.val != node2.val)return false
+  // nodes.push(node1.left)
+      nodes.push(node1.left)
+  // nodes.push(node2.right)
+      nodes.push(node2.right)
+  // nodes.push(node1.right)
+      nodes.push(node1.right)
+  // nodes.push(node2.left)  
+      nodes.push(node2.left)
+    }
+  
+  //return true
+    return true
+  };
