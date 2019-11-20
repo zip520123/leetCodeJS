@@ -27,6 +27,9 @@ Explanation: The result cannot be 2, because [-2,-1] is not a subarray.*/
 // };
 
 //time O(n)
+
+
+
 var maxProduct = function(nums){
 //minArr, maxArr, res = [nums[0]]
   var minArr = [nums[0]]
