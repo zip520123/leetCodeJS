@@ -28,18 +28,14 @@ var letterCombinations = function(digits) {
   dict[7] = "pqrs".split("")
   dict[8] = "tuv".split("")
   dict[9] = "wxyz".split("")
-  
- 
-  let digitsC = digits.split("")
-  
-  let q = [""]
-  digitsC.forEach(digit=>{
-      let len = q.length
-      for(i=0;i<len;i++){
-          let token = q.splice(0,1)
-          let list = dict[digit]
-          list.forEach(char=>{
-              q.push(token + char)
-          })
-      }
+  res = [""]
+
+  digits.split("").map(d=>dict[d]).forEach(list=>{
+    res.splice(0,res.length).forEach(token=>{
+      list.forEach(char=>{
+        res.push(token+char)
+      })
+    })
   })
+  return res
+}
