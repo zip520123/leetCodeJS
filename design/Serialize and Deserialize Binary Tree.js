@@ -54,3 +54,43 @@ const buildTree = (root, tree) => {
   if(tree.right)root.right = buildTree(new TreeNode(tree.right.val),tree.right)
   return root
 }
+
+//iterative
+var serialize = function(root) {
+  if (!root) return "[]"
+  nodes = [root]
+  res = []
+  index = 0
+  while(index < nodes.length){
+    temp = nodes.slice(index,nodes.length)
+    temp.forEach(node => {
+      if (node != null){
+        res.push(node.val)
+        nodes.push(node.left)
+        nodes.push(node.right)
+      }else{
+        res.push(null)
+      }
+      index ++    
+    })
+  }
+  return JSON.stringify(res)
+};
+var deserialize = function(data) {
+  let arr = JSON.parse(data)
+  if (arr.length == 0) return null
+  arr[0] = new TreeNode(arr[0])
+  ptr = 0
+  for(i=0;i<arr.length;i++){
+    if (arr[i] != null){
+      ptr ++
+      arr[ptr] = arr[ptr] == null ? null : new TreeNode(arr[ptr])
+      arr[i].left = arr[ptr]
+       
+      ptr ++
+      arr[ptr] = arr[ptr] == null ? null : new TreeNode(arr[ptr])
+      arr[i].right = arr[ptr]
+    }
+  }
+  return arr[0]
+};
