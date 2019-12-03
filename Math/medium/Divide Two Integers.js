@@ -57,5 +57,5 @@ var divide = function(dividend, divisor) {
     quo+= (1 << shift)
   }
   
-  return quo * sign
+  return sign == -1 ? -quo : quo
 }
