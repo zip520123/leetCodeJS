@@ -15,17 +15,29 @@ return [0, 1].*/
  * @param {number} target
  * @return {number[]}
  */
+
+//time O(n^2)
+//space O(1)
 var twoSum = function(nums, target) {
-  // for i in nums
   for(i = 0; i< nums.length; i+=1){
-    //  for j in nums
     for(j = i + 1; j < nums.length; j+=1){
-      //   if num[i] + num[j] == target return [i,j]  
       if (nums[i] + nums[j] == target) {
         return [i,j]
       }
     }
-  
   }
   return []
 };
+//time O(n)
+//space O(n)
+var twoSum = function(nums, target) {
+  let dict = {}
+  for(i=0;i<nums.length;i++){
+    let res = target - nums[i]
+    if(dict[res] != null){
+      return [dict[res],i]
+    }
+    dict[nums[i]] = i
+  }
+  return []
+}
