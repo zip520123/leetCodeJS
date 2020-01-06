@@ -21,3 +21,7 @@ the decimal part is truncated, 2 is returned.*/
 var mySqrt = function(x) {
   return Math.sqrt(x) | 0
 };
+
+var mySqrt = function(x) {
+  return x ** 0.5 | 0
+};

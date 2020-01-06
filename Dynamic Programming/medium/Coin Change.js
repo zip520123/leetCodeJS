@@ -99,14 +99,15 @@ const coinChange1 = (coins,rem,arr) =>{
 //time O(amount * coins)
 //space O(amount + 1)
 var coinChange = function(coins,amount) {
-  let dp = []
-  for(let i =0;i<=amount;i++){
-    dp.push(amount+1)
-    coins.forEach(coin=>{
-      if(coin <= i){
-        dp[i] = Math.min(dp[i],dp[i - coin] + 1)
-      }
-    })
+  let dp = [0]
+    
+  for(let i=1;i<=amount;i++){
+      dp.push(amount +1)
+      coins.forEach(coin=>{
+          if (coin <= i) {
+              dp[i] = Math.min(dp[i],dp[i-coin] + 1)
+          }
+      })
   }
   return dp[amount] > amount ? -1 : dp[amount]
 
