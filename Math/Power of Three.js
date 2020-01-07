@@ -27,15 +27,10 @@ Could you do it without using any loop / recursion?*/
 //time O(log(n))
 var isPowerOfThree = function(n) {
   if (n < 1)return false
-  //let num = n
   let num = n
-  //while (num > 3)
   while(num % 3 == 0){
-    // num /= 3
     num /= 3
   }
-  
-  //return num == 1
   return num == 1
 };
 
