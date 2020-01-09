@@ -46,3 +46,12 @@ var hammingWeight = function(n) {
 //return sum
   return sum
 };
+
+var hammingWeight = function(n) {
+  let count = 0
+  while(n){
+    count ++
+    n = n & (n - 1)
+  }
+  return count
+}
