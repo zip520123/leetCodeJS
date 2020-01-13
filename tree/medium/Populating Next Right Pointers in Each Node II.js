@@ -63,4 +63,19 @@ var connect = function(root) {
   //return root
     return root
   };
+
+var connect = function(root) {
+  if(root ==null)return null
+  let nodes = [root]
+  while(nodes.length >0){
+    let temp = nodes.splice(0,nodes.length)
+    for(let i = 0;i<temp.length;i++){
+      let node = temp[i]
+      node.next = temp[i + 1]
+      if(node.left)nodes.push(node.left)
+      if(node.right)nodes.push(node.right)
+    }
+  }
+  return root
+}
   
