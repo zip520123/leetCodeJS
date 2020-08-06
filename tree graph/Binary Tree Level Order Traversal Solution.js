@@ -23,33 +23,36 @@ function TreeNode(val,left,right) {
 var levelOrder = function(root) {
   let res = []
   let nodes = []
-  // if (root) nodes.push(root)
   if (root) nodes.push(root)
-  // while(nodes.length > 0)
   while(nodes.length > 0){
-    //  let len = nodes.length
     let len = nodes.length
-  //  temp = []
     let temp = []
-  //  while(len > 0)
     while(len > 0){
-      //   len--
       len--
-  //   node = nodes.shift()
       let node = nodes.shift()
-  //   if node temp.push(node.val)
       if (node) temp.push(node.val)
-  //   if node.left nodes push(node.left)
       if(node.left)nodes.push(node.left)
-  //   if node.right nodes.push(nodes.right)
       if(node.right)nodes.push(node.right)
     }
-  
-  // res.push(temp)
     res.push(temp)
   }
-  
-  //return res
   return res
 }
 
+
+
+var levelOrder = function(root) {
+  if (root == null) return []
+  let res = []
+  
+  var order = (curr, height) => {
+    if (height >= res.length) {
+      res.push([])
+    }
+    res[height].push(curr.val)
+    if (curr.left) order(curr.left, height + 1)
+    if (curr.right) order(curr.right, height + 1)
+  }
+  order(root, 0)
+  return res
+}
