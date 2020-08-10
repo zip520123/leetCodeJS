@@ -1,18 +1,21 @@
 var bs = (arr,tar) => {
-  left = 0
-  right = arr.length 
-  while(left != right){
-      mid = (left + right) / 2 | 0
-      // console.log(left,right,mid)
-      if (arr[mid] <= tar){
+  let left = 0
+  let right = arr.length - 1
+  while(left < right){
+      let mid = left + ((right - left)>>1)
+      console.log(left,right,mid)
+      if (arr[mid] == tar) {
+        return mid
+      } else if(arr[mid] > tar){
+        right = mid - 1
+      } else {
         left = mid + 1
-      }else{
-        right = mid
       }
+    }
+    if (arr[left] != tar) return -1
+    return left
   }
-  return left
-  }
-  tarr = [0,1,1,1,1,1,2,2,3,4,5]
+  tarr = [0,1,1,1,1,1,2,2,3,4,5,7]
   tar = 2
   res = bs(tarr,tar)
   console.log(res)

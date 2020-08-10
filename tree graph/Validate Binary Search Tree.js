@@ -63,3 +63,21 @@ var isValidBST = function(root) {
 };
 
 
+var isValidBST = function(root) {
+    var validBST = (node,low,hight) => {
+        if (node == null){
+            return true
+        }
+        if (node.val <= low || node.val >= hight) {
+            return false
+        }
+        if (node.left != null && validBST(node.left,low,node.val) == false) return false
+        if (node.right != null && validBST(node.right,node.val,hight) == false) return false
+        
+        
+        return true
+    }
+    
+    return validBST(root,-Infinity,Infinity)
+};
+
