@@ -72,4 +72,25 @@ var buildTree = function(preorder, inorder) {
   }
   return root
 }
-  
+
+//----
+var buildTree = function(preorder, inorder) {
+  const dfs = (index, left, right) => {
+      if (left > right||index > inorder.length -1) return null
+      
+      
+      let root = new TreeNode(preorder[index])
+      let inIndex = 0
+      for(let i=left;i<=right;i++){
+          if(inorder[i] == preorder[index]) {
+              inIndex = i
+              break
+          }
+      }
+      root.left = dfs(index+1, left, inIndex - 1)
+      root.right = dfs(index+1 + inIndex - left, inIndex+1, right)
+      
+      return root
+  }  
+  return dfs(0,0,preorder.length - 1)
+};
