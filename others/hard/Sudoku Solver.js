@@ -84,17 +84,18 @@ const dfs = (board) => {
         for(let j=0;j<9;j++){
             if(board[i][j]=="."){
                 for(let k=1;k<=9;k++){
-                    if(checkBoard(board,k,i,j) == true) {
+                    if(checkBoard(board,k,i,j)){
                         board[i][j] = k + ""
-                        if( dfs(board)) {
+                        if (dfs(board) == true) {
                             return true
-                        }else {
+                        } else {
                             board[i][j] = "."
                         }
-                    }
+                    } 
                 }
                 return false
             }
+            
         }
     }
     return true
@@ -110,8 +111,9 @@ const checkBoard = (board, num, row, col) => {
     }
     let box_x = ((row / 3) | 0) * 3
     let box_y = ((col / 3) |0) * 3
-    for(let i=box_x;i<box_x+2;i++){
-        for(let j=box_y;j<box_y+2;j++){
+    for(let i=box_x;i<=box_x+2;i++){
+        for(let j=box_y;j<=box_y+2;j++){
+            
             if(board[i][j] == num) return false
         }
     }
