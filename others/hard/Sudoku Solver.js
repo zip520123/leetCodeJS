@@ -24,54 +24,6 @@ The given board size is always 9x9.*/
  * @return {void} Do not return anything, modify board in-place instead.
  */
 
-// Not working
-// var solveSudoku = function(board) {
-//     let set = new Set()
-//     for(i in board) {
-//         for(j in board[i]) {
-//             let val = board[i][j]
-//             if (val == ".") continue
-//             let rowVal = val+"x"+i
-//             let colVal = val+"y"+j
-//             let boxVal = val+"x"+((i/3)|0) + "y"+((j/3)|0)
-//             set.add(rowVal)
-//             set.add(colVal)
-//             set.add(boxVal)
-//         }
-//     }
-    
-//     for(let i=0;i<9;i++) {
-//         for(let j=0;j<9;j++) {
-//             let val = board[i][j]
-//             if (val == ".") {
-                
-//                 let availableNums = []
-//                 for(let k=1;k<=9;k++) {
-//                     let rowVal = k+"x"+i
-//                     let colVal = k+"y"+j
-//                     let boxVal = k+"x"+((i/3)|0) + "y"+((j/3)|0)
-//                     if ((set.has(rowVal) == false) && (set.has(colVal) == false) && (set.has(boxVal) == false)) {
-//                         availableNums.push(k)
-//                     }
-//                 }
-                
-//                 if (availableNums.length == 1) {
-//                     let val = availableNums[0]
-//                     board[i][j] = val + ""
-//                     let rowVal = val+"x"+i
-//                     let colVal = val+"y"+j
-//                     let boxVal = val+"x"+((i/3)|0) + "y"+((j/3)|0)
-//                     set.add(rowVal)
-//                     set.add(colVal)
-//                     set.add(boxVal)
-//                     i = 0
-//                     j = 0
-//                 }
-//             }
-//         }
-//     }
-//     console.log(board);
-// };
 
 
 var solveSudoku = function(board) {
@@ -95,27 +47,37 @@ const dfs = (board) => {
                 }
                 return false
             }
-            
         }
     }
     return true
 }
 
-const checkBoard = (board, num, row, col) => {
-    for(item of board) {
-        if (item[col] == num) return false
+// const checkBoard = (board, num, row, col) => {
+//     for(item of board) {
+//         if (item[col] == num) return false
         
-    }
-    for(item of board[row]) {
-        if (item == num) return false
-    }
-    let box_x = ((row / 3) | 0) * 3
-    let box_y = ((col / 3) |0) * 3
-    for(let i=box_x;i<=box_x+2;i++){
-        for(let j=box_y;j<=box_y+2;j++){
+//     }
+//     for(item of board[row]) {
+//         if (item == num) return false
+//     }
+//     let box_x = ((row / 3) | 0) * 3
+//     let box_y = ((col / 3) |0) * 3
+//     for(let i=box_x;i<=box_x+2;i++){
+//         for(let j=box_y;j<=box_y+2;j++){
             
-            if(board[i][j] == num) return false
-        }
+//             if(board[i][j] == num) return false
+//         }
+//     }
+//     return true
+// }
+
+const checkBoard = (board,num,row,col) => {
+    for(let i=0;i<9;i++){
+        if (board[i][col] == num) return false 
+        if (board[row][i] == num) return false
+        let box_x = ((row/3)|0) * 3
+        let box_y = ((col/3)|0) * 3
+        if (board[box_x + ((i /3)|0)][box_y + (i%3)] == num) return false //genius
     }
     return true
 }
