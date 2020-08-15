@@ -23,14 +23,14 @@ Given target = 20, return false.*/
  */
 //time O(n*m)
 //space O(1)
-var searchMatrix = function(matrix, target) {
-  for(let i=0;i<matrix.length;i++){
-      for(let j=0;j<matrix[i].length;j++){
-          if(matrix[i][j]==target)return true
-      }
-  }
-  return false
-};
+// var searchMatrix = function(matrix, target) {
+//   for(let i=0;i<matrix.length;i++){
+//       for(let j=0;j<matrix[i].length;j++){
+//           if(matrix[i][j]==target)return true
+//       }
+//   }
+//   return false
+// };
 
 //time O (n+m)
 //space O(1)
@@ -53,3 +53,8 @@ var searchMatrix = function(matrix, target) {
   }
   return false
 }
+
+let input = [[-1,3]]
+let input2 = 3
+
+console.log(searchMatrix(input,input2));
