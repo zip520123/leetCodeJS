@@ -18,23 +18,21 @@ Follow up: Could you improve it to O(n log n) time complexity?*/
 //time O(n^2)
 //space O(n)
 var lengthOfLIS = function(nums) {
-  if (nums.length == 0) {
-      return 0;
-  }
-  let dp = [1]
+  if (nums.length == 0) return 0
   let max = 1
-  for(let i=1;i<nums.length;i++){
-      let maxval = 0
-      for(let j = 0;j<i;j++){
-          if(nums[i]>nums[j]){
-              maxval = Math.max(maxval,dp[j])
+  let j = 1
+  let dp = new Array(nums.length)
+  dp.fill(1)
+  while( j < nums.length ) {
+      for(let i=0;i<j;i++){
+          if (nums[j] > nums[i]) {
+              dp[j] = Math.max(dp[j] , dp[i] + 1) 
+              max = Math.max(max, dp[j])
           }
       }
-      dp[i] = maxval + 1
-      max = Math.max(max,dp[i])
+      j++
   }
   return max
-
 };
 
 //binary search
