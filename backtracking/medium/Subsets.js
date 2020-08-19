@@ -21,6 +21,13 @@ Output:
  * @param {number[]} nums
  * @return {number[][]}
  */
+
+//time O(2 ^ N)
+//Permutations: N!
+//combinations: Ckn = N!/ (N-k)!k!
+//subset: 2^N
+
+
 var subsets = function(nums) {
   let res = [[]]
   nums.forEach(n=>{

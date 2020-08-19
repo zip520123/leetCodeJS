@@ -58,3 +58,7 @@ let input = [[-1,3]]
 let input2 = 3
 
 console.log(searchMatrix(input,input2));
+
+
+//time (log(nm))
+//space (1)

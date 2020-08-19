@@ -64,7 +64,7 @@ var lengthOfLongestSubstring = function(s) {
   } 
   return res
 }
-
+//time O(n) space O(n)
 var lengthOfLongestSubstring = function(s) {
   res = 0
   arr = s.split("")
