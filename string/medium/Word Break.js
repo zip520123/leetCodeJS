@@ -51,10 +51,7 @@ Output: false*/
 //time O(2^n) space O(2^n)
 // var wordBreak = function(s, wordDict) {
 
-//     let set = new Set()
-//     for(word of wordDict) {
-//         set.add(word)
-//     }
+//     let set = new Set(wordDict)
 //     let map = new Map()
 //     const dfs = (s) => {
 //         if (s.length == 0) return true  

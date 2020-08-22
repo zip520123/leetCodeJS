@@ -41,32 +41,27 @@ Explanation: The endWord "cog" is not in wordList, therefore no possible transfo
  * @param {string[]} wordList
  * @return {number}
  */
+//time O(M^2 * N) space O(2N)
 var ladderLength = function(beginWord, endWord, wordList) {
     let wordSet = new Set(wordList)
-    if (wordSet.has(endWord) == false) {
-        return 0
-    }
-
     let seenSet = new Set()
+    if (wordSet.has(endWord) == false) return 0
     let queue = [beginWord]
     let level = 1
-
-    while (queue.length > 0) {
-        let temp = queue.slice()
-        queue = []
-        while(temp.length > 0) {
-            let curr = temp.shift()
-            if (curr == endWord) {
+    while(queue.length > 0) {
+        let temp = queue.splice(0, queue.length) 
+        
+        for (item of temp) {
+            if(item == endWord) {
                 return level
             }
-            for (let item of wordSet) {
-                if (similer(item, curr) && (seenSet.has(item) == false) ) {
-                    queue.push(item)
-                    seenSet.add(item)
+            for(word of wordList) {
+                if ( seenSet.has(word) == false && similer(item, word)) {
+                    seenSet.add(word)
+                    queue.push(word)
                 }
             }
         }
-        
         level++
     }
     return 0

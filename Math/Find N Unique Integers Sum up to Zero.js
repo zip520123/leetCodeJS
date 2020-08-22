@@ -37,6 +37,7 @@ var sumZero = function(n) {
     return res
 };
 
-
+console.log(sumZero(5));
 console.log(sumZero(6));
 console.log(sumZero(7));
+console.log(sumZero(8));

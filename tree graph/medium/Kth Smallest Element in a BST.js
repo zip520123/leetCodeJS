@@ -51,6 +51,17 @@ const inorder = (root,arr) => {
   inorder(root.right,arr)
   return arr
 }
+var kthSmallest = function(root, k) {
+  let arr = []
+  const add = (curr) => {
+      if(curr == null) return
+      add(curr.left)
+      arr.push(curr.val)
+      add(curr.right)
+  }
+  add(root)
+  return arr[k-1]
+};
 //iteration
 //space O(N)
 //time O(N)
