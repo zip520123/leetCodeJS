@@ -24,6 +24,7 @@ Surrounded regions shouldn’t be on the border, which means that any 'O' on the
  * @param {character[][]} board
  * @return {void} Do not return anything, modify board in-place instead.
  */
+//time O(3N)
 var solve = function(board) {
     if (board.length == 0 || board[0].length == 0) return 
     let dfs = (x,y) => {

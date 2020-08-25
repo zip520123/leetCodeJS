@@ -94,3 +94,32 @@ var deserialize = function(data) {
   }
   return arr[0]
 };
+
+//----------------------------------------------------------------
+//time O(N) space O(N)
+var serialize = function(root) {
+  if (root == null) return "X,"
+  let left = serialize(root.left)
+  let right = serialize(root.right)
+  let s = root.val + "," + left + right
+  
+  return  s
+};
+
+var deserialize = function(data) {
+  data = data.substring(0,data.length-1)
+  let queue = data.split(',')
+  const dfs = () => {
+      let nodeS = queue.shift()
+      
+      if(nodeS == "X") {
+          return null
+      }
+      let node = new TreeNode(Number(nodeS))
+      node.left = dfs()
+      node.right = dfs()
+      return node
+  }
+  let root = dfs()
+  return root
+};

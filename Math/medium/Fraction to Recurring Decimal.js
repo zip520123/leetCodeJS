@@ -53,9 +53,9 @@ var fractionToDecimal = function(numerator, denominator) {
       n *= 10
       s += Math.floor(n / d)
       n %= d
-      let i = dict[n]
-      if(i != null){
-          return `${s.slice(0,i)}(${s.slice(i)})`
+      
+      if(dict[n] != null){
+          return `${s.slice(0,dict[n])}(${s.slice(dict[n])})`
       }
   }
   return s
