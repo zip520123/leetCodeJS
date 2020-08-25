@@ -22,31 +22,34 @@ Follow up: Recursive solution is trivial, could you do it iteratively?*/
  * @param {TreeNode} root
  * @return {number[]}
  */
-
+//time O(N) space O(N)
 var inorderTraversal = function(root) {
-  stack = []
-  curr = root
-  res = []
-  while(curr != null || stack.length > 0){
-    while(curr != null){
-      stack.unshift(curr)
-      curr = curr.left
-    }
-    node = stack.shift()
-    res.push(node.val)
-    curr = node.right     
+  let stack = []
+  let res = []
+  let curr = root
+  
+  while(stack.length > 0 || curr != null) {
+      while(curr != null) {
+          stack.push(curr)
+          curr = curr.left
+      }    
+      curr = stack.pop()
+      res.push(curr.val)
+      curr = curr.right
+      
   }
   return res
 };
 
-// var inorderTraversal = function(root) {
-//   return helper(root, [])
-// };
-// const helper = (node, res) => {
-//   if (node) {
-//     if(node.left) helper(node.left,res)
-//     res.push(node.val)
-//     if(node.right) helper(node.right,res)
-//   }
-//   return res
-// }
+var inorderTraversal = function(root) {
+  let res = []
+  let dfs = (curr) => {
+      if (curr == null) return
+      
+      dfs(curr.left)
+      res.push(curr.val)
+      dfs(curr.right)
+  }
+  dfs(root)
+  return res
+};
