@@ -38,46 +38,43 @@
  * @param {TreeNode} root
  * @return {boolean}
  */
-
- /*if(node == null) { return true }
-    var val = node.val
-    if (lower != null && val <= lower) return false
-    if (upper != null && val >= upper) return false
-
-    if (helper(node.right, val, upper) == false) return false
-    if (helper(node.left, lower, val ) == false) return false
-
-    return true */
-var helper = function(node, lower, upper) {
-    if (node == null) return true
-    var val = node.val
-    if (lower != null && lower >= val) return false
-    if (upper != null && upper <= val) return false
-    if (helper(node.left, lower, val) == false) return false
-    if (helper(node.right, val, upper) == false) return false
-    return true
-}
-
+//recursive time O(N) space O(N)
 var isValidBST = function(root) {
-    return helper(root, null, null)
-};
-
-
-var isValidBST = function(root) {
-    var validBST = (node,low,hight) => {
-        if (node == null){
-            return true
-        }
-        if (node.val <= low || node.val >= hight) {
-            return false
-        }
-        if (node.left != null && validBST(node.left,low,node.val) == false) return false
-        if (node.right != null && validBST(node.right,node.val,hight) == false) return false
-        
-        
-        return true
+    let dfs = (curr, low, hight) => {
+        if (curr == null) return true    
+        if(curr.val <= low) return false
+        if(curr.val >= hight) return false
+        return dfs(curr.left, low, curr.val) && dfs(curr.right, curr.val, hight)
     }
     
-    return validBST(root,-Infinity,Infinity)
+    return dfs(root,-Infinity, Infinity)
 };
-
+//Iteration time O(N) space O(N)
+var isValidBST = function(root) {
+    if (root == null) return true
+    let nodeStack = [root]
+    let lowStack = [-Infinity]
+    let upperStack = [Infinity]
+    
+    while(nodeStack.length > 0) {
+        let curr = nodeStack.pop()
+        let low = lowStack.pop()
+        let upper = upperStack.pop()
+        if (curr.val <= low || curr.val >= upper ) {
+            return false    
+        }
+        if (curr.left != null){
+            nodeStack.push(curr.left)
+            lowStack.push(low)
+            upperStack.push(curr.val)    
+        }
+        
+        if (curr.right != null) {
+            nodeStack.push(curr.right)
+            lowStack.push(curr.val)
+            upperStack.push(upper)    
+        }
+        
+    }
+    return true
+};

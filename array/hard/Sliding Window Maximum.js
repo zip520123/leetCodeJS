@@ -29,30 +29,19 @@ Could you solve it in linear time?*/
 //space O(n)
 var maxSlidingWindow = function(nums, k) {
   if (nums.length < 1) return []
-  //res = [nums[0]]
   let res = [nums[0]]
-  //window = [nums[0]]
   let window = [nums[0]]
-  //for i=1 i < nums.len i++
   for(i=1;i<nums.length;i++){
-      // window push nums[i]
       let n = nums[i]
       window.push(n)
-      // i < k 
       if (i < k){
-        //res[0] = max(res[0],n)
           res[0] = Math.max(res[0],n) }    
       else {
-          // if i >= k
-          // window shift()
           window.shift()
-          // max = window.max
-          let max = Math.max(...window)
-      // res push max    
+          let max = Math.max(...window) 
           res.push(max)
       }
   }
-  // return res
   return res
 };
 
@@ -87,5 +76,25 @@ var maxSlidingWindow = function(nums, k) {
       }
      })
   
+  return res
+};
+
+var maxSlidingWindow = function(nums, k) {
+  let res = []
+  let queue = []
+  for(let i=0;i<nums.length;i++) {
+      let n = nums[i]
+      while(queue.length > 0 && nums[queue[queue.length - 1]] < n) {
+          queue.pop()
+      }
+      queue.push(i)
+      if(i>=k-1) {
+          res.push(nums[queue[0]])
+          //if queue.first index == windows.first index, remove it, because this element will out of window in next loop. 
+          if(queue[0] == i-(k-1)) queue.shift()
+      }
+      
+  }
+
   return res
 };
