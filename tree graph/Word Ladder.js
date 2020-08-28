@@ -41,24 +41,26 @@ Explanation: The endWord "cog" is not in wordList, therefore no possible transfo
  * @param {string[]} wordList
  * @return {number}
  */
-//time O(M^2 * N) space O(2N)
+//time O(M^2 * N) space O(M^2 * N) M is the length of each word, N is the total number of words
+//
 var ladderLength = function(beginWord, endWord, wordList) {
-    let wordSet = new Set(wordList)
+    let set = new Set(wordList)
     let seenSet = new Set()
-    if (wordSet.has(endWord) == false) return 0
-    let queue = [beginWord]
+    if(set.has(endWord) == false) return 0
+    
     let level = 1
+    let queue = [beginWord]
+    
     while(queue.length > 0) {
-        let temp = queue.splice(0, queue.length) 
-        
-        for (item of temp) {
-            if(item == endWord) {
+        let temp = queue.splice(0,queue.length)
+        for(let word of temp) {
+            if (word==endWord) {
                 return level
             }
-            for(word of wordList) {
-                if ( seenSet.has(word) == false && similer(item, word)) {
-                    seenSet.add(word)
-                    queue.push(word)
+            for(let dictWord of set) {
+                if(similar(word,dictWord) == true && seenSet.has(dictWord) == false) {
+                    queue.push(dictWord)
+                    seenSet.add(dictWord)
                 }
             }
         }
@@ -67,22 +69,62 @@ var ladderLength = function(beginWord, endWord, wordList) {
     return 0
 };
 
-var similer = (word1,word2) => {
-    let diff = 0
-    let list1 = word1.split('')
-    let list2 = word2.split('')
-    for (let i=0;i<list1.length;i++) {
-        if (list1[i] != list2[i]) {
-            diff++
-        }
+const similar = (w1,w2) => {
+    let count = 0
+    for(let i=0;i<w1.length;i++){
+        if (w1[i] != w2[i])count++
     }
-    return diff <= 1
-} 
+    return count == 1
+}
 
-let beginWord = "hit"
-let endWord = "cog"
-let wordList = ["hot","dot","dog","lot","log","cog"]
+//bidirectional search time O(M^2 * N) space O(M^2 * N) average is less than one way
+var ladderLength = function(beginWord, endWord, wordList) {
 
-similer("hot","hit")
+    let beginSet = new Set([beginWord])
+    let endSet = new Set([endWord])
+    let seenSet = new Set()
+    let wordSet = new Set(wordList)
+    if(wordSet.has(endWord) == false) return 0
+    let level = 1
 
-similer("hota","hitb")
+    while(beginSet.size >0 && endSet.size > 0) {
+        if(beginSet.size > endSet.size) {
+            let t = beginSet
+            beginSet = endSet
+            endSet = t
+        }
+
+        let temp = new Set()
+        for(let word of beginSet) {
+            for(let i = "a".charCodeAt(); i<= "z".charCodeAt();i++) {
+                let char = String.fromCharCode(i)
+                for(let j=0;j<word.length;j++) {
+                    let newWord = word.substring(0,j) + char + word.substring(j+1)
+                    if(endSet.has(newWord)) {
+                        return level + 1
+                    }
+
+                    if(seenSet.has(newWord) == false && wordSet.has(newWord)) {
+                        temp.add(newWord)
+                        seenSet.add(newWord)
+                    }
+                }
+            }
+        }
+
+        beginSet = temp
+        level ++
+    }
+    return 0
+}
+
+
+
+let input = "hit"
+let input2 = "cog"
+let input3 = ["hot","dot","dog","lot","log","cog"]
+
+similar("hot","hit")
+similar("hota","hitb")
+
+console.log(ladderLength(input,input2,input3));

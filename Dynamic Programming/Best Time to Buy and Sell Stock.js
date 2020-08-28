@@ -22,22 +22,19 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
  * @param {number[]} prices
  * @return {number}
  */
+//time O(n^2) space O(1)
 // var maxProfit = function(prices) {
-//     // find every days profit
-//     var profit = 0
-//     for (let i = 0; i < prices.length; i += 1) {
-//       var buyDay = prices[i]
-//       for (let j = i + 1; j < prices.length; j+= 1) {
-//         var sellDay = prices[j]
-//         if ((sellDay - buyDay) > profit ) {
-//           profit = sellDay - buyDay
-//         }
+//   let max = 0
+  
+//   for(let i=0;i<prices.length-1;i++){
+//       for(let j=i+1;j<prices.length;j++){
+//           max = Math.max(prices[j]- prices[i], max)
 //       }
-//     }
-//     return profit
+//   }
+//   return max
 // };
-// time O(n^2)
-// space(1)
+
+// time O(n) space(1)
 //---
 var maxProfit = function(prices) {
   //find minPrice and caculator maxProfit at the sometime

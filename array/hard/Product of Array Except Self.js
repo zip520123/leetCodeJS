@@ -13,7 +13,7 @@ Could you solve it with constant space complexity? (The output array does not co
  * @param {number[]} nums
  * @return {number[]}
  */
-//brute force
+//brute force time O(N^2) space O(1)
 var productExceptSelf = function(nums) {
   res = []
   
@@ -49,7 +49,7 @@ var productExceptSelf = function(nums) {
 }
 
 //time O(N)
-//space O(N)
+//space O(N) or O(1) if the output array does not count 
 
 var productExceptSelf = function (nums) {
   res = [1]
