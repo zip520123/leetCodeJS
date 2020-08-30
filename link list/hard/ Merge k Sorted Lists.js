@@ -20,6 +20,32 @@ Output: 1->1->2->3->4->4->5->6*/
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
+
+//burte force O(NlogN) space O(N)
+var mergeKLists = function(lists) {
+  if (lists.length == 0)  return null
+  let root = new ListNode(-1)
+  let queue = []
+  for(let list of lists) {
+      let curr = list
+      while(curr) {
+          queue.push(curr.val)
+          curr = curr.next
+      }
+      
+  }
+  queue.sort((a,b)=>a-b)
+  let curr = root
+  while(queue.length >0) {
+      let val = queue.shift()
+      let node= new ListNode(val)
+      curr.next = node
+      curr = curr.next
+  }
+  return root.next
+};
+
+//time O(N) space O(1)
 var mergeKLists = function(lists) {
   if (lists.length == 0)return null
   return lists.reduce((mergeTwoList))
