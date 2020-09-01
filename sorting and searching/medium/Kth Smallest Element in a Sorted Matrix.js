@@ -23,6 +23,9 @@ You may assume k is always valid, 1 ≤ k ≤ n2.
  * @param {number} k
  * @return {number}
  */
+
+//binery serach in 2D matrix
+//Time O(nlogn) space O(1)
 var kthSmallest = function(matrix, k) {
     if (matrix.length == 0 || matrix[0].length == 0) return 0
     const count = (num) => {
