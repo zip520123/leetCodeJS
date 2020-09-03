@@ -22,6 +22,7 @@ There must be no consecutive horizontal lines of equal height in the output skyl
  * @param {number[][]} buildings
  * @return {number[][]}
  */
+//time O(nlogn) space O(N)
 var getSkyline = function(buildings) {
     if(buildings.length == 0) return []
     let queue = new MaxQueue()
@@ -70,8 +71,6 @@ var getSkyline = function(buildings) {
     return res
 };
 
-
-
 var MaxQueue = function() {
     this.arr = []
 }
@@ -103,10 +102,40 @@ MaxQueue.prototype.getMax = function() {
     if(this.arr.length == 0) return 0
     return this.arr[this.arr.length - 1]
 }
+
+//----------------------------------------------------------------
+//https://leetcode.com/problems/the-skyline-problem/discuss/395923/JavaScript-Easy-and-Straightforward-with-picture-illustrations
+//time O(n^2) spaceO(n)
+var getSkyline = function(buildings) {
+    let points = new Set()
+    for(let [l, r, h] of buildings) {
+        points.add(l)
+        points.add(r)
+    }
+    let res = [[0,0]]
+    let points2 = [...points]
+    points2.sort((a,b)=>a-b)
+    for(let point of points2) {
+        let height = 0
+        
+        for(let building of buildings) {
+            if(building[0]<= point && building[1]> point){
+                height = Math.max(height, building[2])
+            }
+        }
+        
+        if(res[res.length - 1][1] == height) continue
+        res.push([point, height])
+    }
+
+    return res.slice(1)
+};
+
+
 // let input = [[2,9,10],[3,7,15],[5,12,12],[15,20,10],[19,24,8]]
-let input = [[2,4,7],[2,4,5],[2,4,6]]
+// let input = [[2,4,7],[2,4,5],[2,4,6]]
 // let input = [[0,2,3],[2,5,3]]
 // let input = [[1,2,1],[1,2,2],[1,2,3],[2,3,1]]
-// let input = [[2,13,10],[10,17,25],[12,20,14]]
+let input = [[2,13,10],[10,17,25],[12,20,14]]
 // let input = [[1,2,1],[1,2,2],[1,2,3]]
 console.log(getSkyline(input));
