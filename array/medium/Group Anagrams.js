@@ -18,23 +18,38 @@ The order of your output does not matter.*/
  * @param {string[]} strs
  * @return {string[][]}
  */
+
+//time O(N KlogK) space O(N)
 var groupAnagrams = function(strs) {
-  //dict
   let dict = {}
-  //strs forEach w
   strs.forEach(w=>{
-    // key = w.sort
     let key = w.split("").sort().join("")
-  // dict[key] push w
     dict[key] == null ? dict[key] = [w] : dict[key].push(w)
   })
-  //res = []
   let res = []
-  //Object.keys(dict).forEach key
   Object.keys(dict).forEach(key =>{
-    // res.push(dict[key])
     res.push(dict[key])
   })
-  //return res
+  return res
+};
+
+var groupAnagrams = function(strs) {
+  let map = new Map()
+  for (let str of strs) {
+      let arr = str.split("")
+      arr.sort((a,b)=>{
+          return a.charCodeAt() - b.charCodeAt()
+      })
+      let key = arr.join("")
+      if(map.has(key)) {
+          map.get(key).push(str)
+      } else{
+          map.set(key,[str])
+      }
+  }
+  let res = []
+  for(let [key, value] of map) {
+      res.push(value)
+  }
   return res
 };

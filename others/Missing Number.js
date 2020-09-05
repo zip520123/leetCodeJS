@@ -14,11 +14,41 @@ Your algorithm should run in linear runtime complexity. Could you implement it u
  * @param {number[]} nums
  * @return {number}
  */
+//sorting time O(nlogn) space O(n)
+var missingNumber = function(nums) {
+  nums.sort((a,b)=>a-b)
+  for(let i=0;i<=nums.length;i++){
+      if(nums[i] != i) return i
+  }
+  return -1
+};
+
+//bit time O(n) space O(1)
 var missingNumber = function(nums) {
   let res = 0
   for(let i=0;i<=nums.length;i++){
     res ^= i
-    if (i< nums.length)res ^= nums[i]
+    res ^= nums[i]
   }
   return res
+};
+
+//hashMap time O(n) space O(n)
+var missingNumber = function(nums) {
+  let set = new Set(nums)
+  for(let i=0;i<=nums.length;i++){
+      if (set.has(i) == false) return i
+  }
+  return -1
+};
+
+//Gauss' Formula (1+n)*n / 2 time O(N) space O(1)
+
+var missingNumber = function(nums) {
+  let sum = ((nums.length + 1) * nums.length) >> 1
+  let currSum = 0
+  for(let n of nums){
+      currSum+=n
+  }
+  return sum - currSum
 };
