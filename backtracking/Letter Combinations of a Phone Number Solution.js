@@ -39,3 +39,32 @@ var letterCombinations = function(digits) {
   })
   return res
 }
+
+var letterCombinations = function(digits) {
+  if(digits.length == 0) return []
+  let dict = {}
+  dict[0] = []
+  dict[1] = []
+  dict[2] = "a,b,c".split(",")
+  dict[3] = "d,e,f".split(",")
+  dict[4] = "ghi".split("")
+  dict[5] = "jkl".split("")
+  dict[6] = "mno".split("")
+  dict[7] = "pqrs".split("")
+  dict[8] = "tuv".split("")
+  dict[9] = "wxzy".split("")
+  
+  let res = [""]
+  
+  for(let digit of digits) {
+      let list = dict[digit]
+      let temp = res.splice(0,res.length)
+      
+      for(let char of list) {
+          for(let currString of temp) {
+              res.push(currString+char)   
+          }    
+      }
+  }
+  return res
+};
