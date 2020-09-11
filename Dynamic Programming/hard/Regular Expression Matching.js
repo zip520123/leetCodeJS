@@ -87,7 +87,9 @@ var isMatch = function(s, p) {
 };
 // let input = "aa"
 // let input2 = "a"
-let input = "aab"
-let input2 = "c*a*b"
+// let input = "aab"
+// let input2 = "c*a*b"
+let input = "aa"
+let input2 = "a*"
 
 console.log(isMatch(input,input2));
