@@ -17,7 +17,6 @@ If you have figured out the O(n) solution, try coding another solution using the
  */
 // time O(n^2)
 var maxSubArray = function(nums) {
-    //add all and store max array
   var maxValue = -Infinity
   
   for (i = 0; i < nums.length; i+=1){
@@ -31,16 +30,31 @@ var maxSubArray = function(nums) {
   return maxValue
 };
 
+var maxSubArray = function(nums) {
+  if(nums.length==0) return 0
+  let max = -Infinity
+  for(let i=0;i<nums.length;i++){
+      let sum = 0
+      for(let j=i;j<nums.length;j++){
+          sum+=nums[j]
+          max = Math.max(sum, max)
+      }
+  }
+  return max
+};
+
 //time O(n)
 
-var maxSubArray = function(nums){
-//localMax = max(nums[i],localMax + nums[i])
-//globalMax = localMax > globalMax ? localMax : globalMax
-  var localMax = -Infinity
-  var globalMax = -Infinity
-  nums.forEach(n=>{
-    localMax = Math.max(n,localMax + n)
-    globalMax = localMax > globalMax ? localMax : globalMax
-  })
+var maxSubArray = function(nums) {
+  if(nums.length==0) return 0
+  let localMax = -Infinity
+  let globalMax = -Infinity
+  
+  for(let n of nums) {
+      localMax = Math.max(n,localMax+n)
+      globalMax = Math.max(localMax,globalMax)
+  }
   return globalMax
-}
+};
+let input = [-2,1,-3,4,-1,2,1,-5,4]
+console.log(maxSubArray(input));

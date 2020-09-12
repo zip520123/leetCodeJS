@@ -71,3 +71,40 @@ var isValidSudoku = function(board) {
     }
     return true
 };
+
+var isValidSudoku = function(board) {
+    for(let i=0;i<board.length;i++){
+        for(let j=0;j<board[i].length;j++){
+            if(board[i][j]!= "."){
+                let t = board[i][j]
+                board[i][j] = "."
+                if (check(board,i,j,t)==false){
+                    return false
+                }
+                board[i][j] = t
+            }
+        }
+    }
+    return true
+};
+
+var check = (board,x,y,num) => {
+    for(let i=0;i<9;i++){
+        if (board[x][i] == num) return false
+        if (board[i][y] == num) return false
+        if (board[(i/3|0) + (x/3|0)*3][(i%3) + (y/3|0)*3] == num) return false
+    }
+    return true
+}
+
+let input = [[".",".",".",".",".",".",".",".","."],
+             [".",".",".",".",".","6",".",".","."],
+             [".",".",".",".",".",".",".",".","."],
+             [".",".",".",".","8",".",".",".","."],
+             ["9",".",".",".","7","5",".",".","."],
+             [".",".",".",".","5",".",".","8","."],
+             [".",".","9",".",".",".",".",".","."],
+             ["2",".","6",".",".",".",".",".","."],
+             [".",".",".",".",".",".",".",".","."]]
+
+console.log(isValidSudoku(input));

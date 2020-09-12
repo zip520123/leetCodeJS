@@ -49,6 +49,7 @@ Output: false
  * @param {string} p
  * @return {boolean}
  */
+//time O(s * p) space O(s * p)
 var isMatch = function(s, p) {
     let dp = new Array(s.length+1)
     for(let i=0;i<dp.length;i++){
