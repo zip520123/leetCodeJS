@@ -30,3 +30,16 @@ var maxDepth = function(root) {
     if (root == null) { return 0 }
     return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1
 };
+//time O(n) space O(n)
+var maxDepth = function(root) {
+    let max = 0
+    let dfs = (curr,count) => {
+        if(curr==null) return 
+        count++
+        max = Math.max(count,max)
+        dfs(curr.left,count)
+        dfs(curr.right,count)
+    }
+    dfs(root,0)
+    return max
+};
