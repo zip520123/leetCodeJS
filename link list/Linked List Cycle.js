@@ -46,7 +46,6 @@ Can you solve it using O(1) (i.e. constant) memory?*/
 //time O(N)
 //space O(N)
 var hasCycle = function(head) {
-
   let set = new Set()
   let curr = head
   while(1){
@@ -55,5 +54,32 @@ var hasCycle = function(head) {
     set.add(curr)
     curr = curr.next
   }
+};
 
+var hasCycle = function(head) {
+  let set = new Set()
+  let curr = head
+  while(curr){
+      if(set.has(curr)) return true
+      set.add(curr)
+      curr = curr.next
+  }
+  return false
+};
+
+//two pointers time O(n) or O(n+k) space O(1)
+var hasCycle = function(head) {
+  if(head == null) return false
+  
+  let fast = head
+  let slow = head
+  
+  while(fast && slow) {
+      if(fast.next ==null) return false
+      slow = slow.next
+      fast = fast.next.next
+      if(fast == slow) return true
+  }
+  
+  return false
 };

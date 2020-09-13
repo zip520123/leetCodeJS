@@ -39,20 +39,21 @@ Given target = 20, return false.*/
 */
 
 var searchMatrix = function(matrix, target) {
-  if(matrix ==null || matrix.length ==0||matrix[0].length == 0)return false
-  let c = matrix[0].length - 1
-  let r = 0
-  while(r<matrix.length&&c>=0){
-      let curr = matrix[r][c]
-      if(curr == target)return true
-      if(target<curr){
-        c--
+  if(matrix.length == 0) return false
+  let x = 0
+  let y = matrix[0].length -1
+  
+  while(x<matrix.length&&y>=0){
+      let curr = matrix[x][y]
+      if(curr == target) return true
+      if(curr>target) {
+          y--
       }else{
-        r++
+          x++
       }
   }
   return false
-}
+};
 
 let input = [[-1,3]]
 let input2 = 3
