@@ -31,12 +31,8 @@ var MinStack = function () {
  */
 MinStack.prototype.push = function (x) {
   this.arr.push(x)
-  if (this.minArr.length == 0) {
-    this.minArr.push(x)
-  }else {
-    if (this.minArr[this.minArr.length - 1] >= x){
-      this.minArr.push(x)
-    }
+  if(this.minStack.length==0 || this.minStack[this.minStack.length-1] >=x) {
+    this.minStack.push(x)    
   }
 };
 

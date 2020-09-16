@@ -39,3 +39,15 @@ var subsets = function(nums) {
   })
   return res
 };
+var subsets = function(nums) {
+  let res = [[]]
+  for(let n of nums) {
+      let temp = res.slice()
+      for(let item of temp) {
+          let token = item.slice()
+          token.push(n)
+          res.push(token)
+      }
+  }
+  return res
+};

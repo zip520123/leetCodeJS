@@ -17,41 +17,42 @@ Output:
  * @param {number[]} nums
  * @return {number[][]}
  */
+
 var permute = function(nums) {
-  let res = [[]]
-  for(let i=0;i<nums.length;i++){
-      let n = nums[i]
+  let res = []
+  for (let n of nums) {
       let temp = res.splice(0,res.length)
-      for(let j=0;j<temp.length;j++){
-          let token = temp[j]
-          for(let k=0;k<=token.length;k++){
-            if (token.length ==0){
-                res.push([n])
-            } else{
-                let char = token.slice()
-                char.splice(k,0,n)
-                res.push(char)
-            } 
-          }
+      if(temp.length==0) {
+          res.push([n])
+      } else {
+          for(let i=0;i<temp.length;i++){
+              let list = temp[i]
+              for(let j=0;j<=list.length;j++){
+                  let token = list.slice()
+                  token.splice(j,0,n)
+                  res.push(token)
+              }
+          } 
       }
   }
   return res
 };
 
 var permute = function(nums) {
-  let res = [[]]
-  nums.forEach(n=>{
-    res.splice(0,res.length).forEach(temp=>{
-      for(let i=0;i<=temp.length;i++){
-        if(temp.length == 0){
-          res.push([n])
-        }else{
-          let char = temp.slice()
-          char.splice(i,0,n)
-          res.push(char)
-        }
+  let res = []
+  let dfs = acc => {
+      if(nums.length==0){
+          res.push(acc.slice())
+          return
       }
-    })
-  })
+      for(let i=0;i<nums.length;i++){
+          let n = nums.splice(i,1)[0]
+          acc.push(n)
+          dfs(acc)
+          acc.pop()
+          nums.splice(i,0,n)
+      }
+  }
+  dfs([])
   return res
-}
+};

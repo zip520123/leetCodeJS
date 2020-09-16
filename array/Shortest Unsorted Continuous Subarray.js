@@ -64,7 +64,32 @@ var findUnsortedSubarray = function(nums) {
     return right - left <0 ? 0: right-left+1
 };
 
-
+//Without Using Extra Space time O(n) space O(1)
+var findUnsortedSubarray = function(nums) {
+    let min = Infinity, max = -Infinity
+    let flag = false
+    for(let i=1;i<nums.length;i++) {
+        if(nums[i] < nums[i-1]) flag = true
+        if(flag) min = Math.min(min, nums[i])
+    }
+    flag = false
+    for(let i=nums.length-2;i>=0;i--) {
+        if(nums[i] > nums[i+1]) flag = true
+        if(flag) max = Math.max(max,nums[i])
+    }
+    
+    let left=0
+    while(left<nums.length) {
+        if(min < nums[left])break
+        left++
+    }
+    let right =nums.length-1
+    while(right>=0){
+        if(max > nums[right]) break
+        right--
+    }
+    return right - left <0?0: right-left+1
+};
 
 // let input = [2,6,4,8,10,9,15]
 // let input = [1,2,3,4,3,2]
