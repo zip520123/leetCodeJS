@@ -18,6 +18,7 @@ Output:
  * @return {number[][]}
  */
 
+ //time O(n!) space O(n)
 var permute = function(nums) {
   let res = []
   for (let n of nums) {

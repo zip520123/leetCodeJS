@@ -92,3 +92,22 @@ var countAndSay = function(n) {
   }
   return s
 };
+var countAndSay = function(n) {
+  let s = "1"
+  for(let i=0;i<n-1;i++){
+      let str = s
+      s = ""
+      let count=0, c = str[0]
+      for(let j=0;j<str.length;j++){
+          if(str[j] == c) {
+              count++
+          } else {
+              s += count + c
+              count = 1
+              c = str[j]
+          }
+      }
+      s += count + c
+  }
+  return s
+};
