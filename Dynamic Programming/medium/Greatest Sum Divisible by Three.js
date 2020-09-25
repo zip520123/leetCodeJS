@@ -28,16 +28,16 @@ Constraints:
  * @param {number[]} nums
  * @return {number}
  */
-var maxSumDivThree = function(nums) { 
-  let gd = [0,0,0]
-  
-  nums.forEach(n=>{
-    let ld = gd.slice()
-    ld.forEach(j =>{
-      gd[(n + j) % 3] = Math.max(gd[(n + j) % 3], n + j)
-    })
-
-  })
-
-  return gd[0]
+var maxSumDivThree = function(nums) {
+  let gdp = [0,0,0]
+  for(let n of nums) {
+      let ldp = gdp.slice()
+      for(let curr of ldp) {
+          gdp[(curr+n) % 3] = Math.max(gdp[(curr+n) % 3], curr+n)
+      }
+  }
+  return gdp[0]
 };
+
+let input = [3,6,5,1,8]
+console.log(maxSumDivThree(input));

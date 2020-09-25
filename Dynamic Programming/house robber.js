@@ -21,14 +21,29 @@ Total amount you can rob = 2 + 9 + 1 = 12.
  * @param {number[]} nums
  * @return {number}
  */
+//time O(n) space O(n)
 var rob = function(nums) {
-  if (!nums) return null
-  if (nums.length == 1) return nums[0]
-  let dp = [nums[0]]
-  dp[1] = Math.max(nums[0],nums[1])
-  for(i=2;i<nums.length;i++)
-    dp[i] = Math.max(dp[i - 2] + nums[i],dp[i - 1])
-  return dp[dp.length - 1]
+  if (nums.length==0) return 0
+  if(nums.length==1) return nums[0]
+  let dp = [nums[0], Math.max(nums[0],nums[1])]
+  for(let i=2;i<nums.length;i++){
+      dp[i] = Math.max(dp[i-2] + nums[i], dp[i-1])
+  }
+  return dp[dp.length-1]
+};
+
+//time O(n) space O(1)
+var rob = function(nums) {
+  if(nums.length==0) return 0
+  if(nums.length==1) return nums[0]
+  let dp = [nums[0],Math.max(nums[1],nums[0])]
+  let v1= nums[0], v2 = Math.max(nums[1],nums[0])
+  for(let i=2;i<nums.length;i++){
+      let temp = v2
+      v2 = Math.max(v1 + nums[i], v2)
+      v1 = temp
+  }
+  return v2
 };
 // let p = 0
 //   return nums.reduce((a, b) => Math.max(p + b, p = a), 0)

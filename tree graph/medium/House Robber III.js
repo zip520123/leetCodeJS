@@ -27,46 +27,49 @@ Input: [3,4,5,1,3,null,1]
 
 Output: 9
 Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.*/
-/**
- * Definition for a binary tree node.
- * function TreeNode(val, left, right) {
- *     this.val = (val===undefined ? 0 : val)
- *     this.left = (left===undefined ? null : left)
- *     this.right = (right===undefined ? null : right)
- * }
- */
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+   this.right = (right===undefined ? null : right)
+}
 /**
  * @param {TreeNode} root
  * @return {number}
  */
+//time O(n^2) space O(n) optimal "substructure" + "overlapping of subproblems
 var rob = function(root) {
-    if(root == null) return 0
-    let flag = true
-    let stack = [root]
-    let even = 0
-    let odd = 0
-    while(stack.length>0) {
-        let currNodes = stack.splice(0,stack.length)
-        let sum = 0
-        for(let node of currNodes) {
-            sum += node.val
-            if(node.left)stack.push(node.left)
-            if(node.right)stack.push(node.right)
-        }
-        if(flag == true) {
-            even += sum
-        } else {
-            odd += sum
-        }
-        flag = !flag
+    if (root == null) return 0
+    let total = 0
+    if(root.left) {
+        total += rob(root.left.left) + rob(root.left.right)
     }
-    return Math.max(even, odd)
+    if(root.right) {
+        total += rob(root.right.left) + rob(root.right.right)
+    }
+    return Math.max(root.val+ total, rob(root.left) + rob(root.right))
 };
-function TreeNode(val, left, right) {
-        this.val = (val===undefined ? 0 : val)
-        this.left = (left===undefined ? null : left)
-       this.right = (right===undefined ? null : right)
-}
+
+//dp time O(n) space O(n + space)
+
+var rob = function(root) {
+    let map = new Map()
+    let subRob = (root) => {
+        if (root == null) return 0
+        if(map.has(root)) return map.get(root)
+        let total = 0
+        if(root.left) {
+            total += subRob(root.left.left) + subRob(root.left.right)
+        }
+        if(root.right) {
+            total += subRob(root.right.left) + subRob(root.right.right)
+        }
+        let val = Math.max(root.val+ total, subRob(root.left) + subRob(root.right))
+        map.set(root, val)
+        return val 
+    }
+    return subRob(root)
+};
+
 let input = [4,1,null,2,null,3]
 let build = (i) => {
     let val = input[i]
