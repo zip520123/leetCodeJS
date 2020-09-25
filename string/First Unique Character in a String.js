@@ -15,17 +15,29 @@ Note: You may assume the string contain only lowercase letters.*/
  * @return {number}
  */
 var firstUniqChar = function(s) {
-  //dict
   let dict = {}
-  //for i=0; i< s.length; i++
   for (i=0; i< s.length;i++){
-    // dict[s[i]]++
     dict[s[i]] == null ? dict[s[i]] = 1 : dict[s[i]]++
   }
   
-  //for(item in dict)
   for(item in dict)
     if (dict[item] == 1) return s.indexOf(item)
-  // if dict[item] == 1 return s.indexOf(item)
+  return -1
+};
+
+var firstUniqChar = function(s) {
+  let map = new Map()
+  for(let c of s) {
+      if(map.has(c)) {
+          map.set(c,map.get(c) + 1)
+      }else {
+          map.set(c,1)
+      }
+  }
+  
+  for (let i=0;i<s.length;i++) {
+      let c = s[i]
+      if (map.get(c) == 1) return i
+  }
   return -1
 };
