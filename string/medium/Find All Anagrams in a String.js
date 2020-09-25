@@ -33,6 +33,7 @@ The substring with start index = 2 is "ab", which is an anagram of "ab".*/
  * @param {string} p
  * @return {number[]}
  */
+// see "Permutation in String"
 //brute force time O(n^2) space O(n)
 var findAnagrams = function(s, p) {
     if(s.length==0) return []

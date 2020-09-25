@@ -14,17 +14,20 @@ Note: You may assume the string contain only lowercase letters.*/
  * @param {string} s
  * @return {number}
  */
+//brute force time O(n^2) space O(1)
 var firstUniqChar = function(s) {
-  let dict = {}
-  for (i=0; i< s.length;i++){
-    dict[s[i]] == null ? dict[s[i]] = 1 : dict[s[i]]++
+  let index = -1
+  out:for(let i=0;i<s.length;i++){
+      for(let j=0;j<s.length;j++) {
+          if(s[i] == s[j] && i != j) continue out
+      }
+      index = i
+      break
   }
-  
-  for(item in dict)
-    if (dict[item] == 1) return s.indexOf(item)
-  return -1
-};
+  return index
+}
 
+//time O(n) space O(n) or O(26)
 var firstUniqChar = function(s) {
   let map = new Map()
   for(let c of s) {
@@ -38,6 +41,17 @@ var firstUniqChar = function(s) {
   for (let i=0;i<s.length;i++) {
       let c = s[i]
       if (map.get(c) == 1) return i
+  }
+  return -1
+};
+
+var firstUniqChar = function(s) {
+  let dict = {}
+  for(let c of s) {
+      dict[c] = dict[c] == null ? 1 : ++dict[c]
+  }
+  for(let i=0;i<s.length;i++){
+      if (dict[s[i]] == 1) return i
   }
   return -1
 };
