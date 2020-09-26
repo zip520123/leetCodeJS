@@ -109,6 +109,32 @@ var findAnagrams = function(s, p) {
     return res
 };
 
+var findAnagrams = function(s, p) {
+    let res = []
+    let dict = {}
+    for(let c of p) {
+        dict[c] = dict[c]==null? 1: ++dict[c]
+    }
+    let left = 0, right =0, count = p.length
+    while(right < s.length) {
+        let w = s[right]
+        if(dict[w] != null) {
+            if(dict[w] > 0) count--
+            dict[w]--
+        }else{
+            dict[w] = -1
+        }
+        while(dict[w]<0){
+            dict[s[left]]++
+            if(dict[s[left]]>0)count++
+            left++
+        }
+        if(count==0)res.push(left)
+        right++
+    }
+    return res
+};
+
 let input = "cbaebabacd"
 let input2 = "abc"
 console.log(findAnagrams(input,input2));

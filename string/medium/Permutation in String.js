@@ -28,30 +28,25 @@ The length of both given strings is in range [1, 10,000].
 //time O(n) space O(s1.length) or O(1) 26 key-value pairs
 var checkInclusion = function(s1, s2) {
     let dict = {}
-    for (let c of s1) {
-        dict[c] = dict[c] == null ? 1: ++dict[c]
+    for(let c of s1) {
+        dict[c] = dict[c] == null?1:++dict[c]
     }
-    let count = s1.length
-    let left = 0
-    let right = 0
-    while(right < s2.length) {
-       let w = s2[right]
-       if(dict[w] != null) {
-           if(dict[w] >0) count--
-           if (count==0) return true
-           dict[w]--
-       } else {
-           dict[w] = -1
-       }
-       
-        while(dict[w] <0) {
+    let left = 0, right =0, count = s1.length
+    while(right<s2.length){
+        let c = s2[right]
+        if(dict[c]!=null) {
+            if(dict[c]>0) count--
+            dict[c]--
+        } else {
+            dict[c] = -1
+        }
+        while(dict[c]<0) {
             dict[s2[left]]++
-            if(dict[s2[left]] > 0)count++
+            if(dict[s2[left]]>0) count++
             left++
         }
-       right++
-       
+        if(count==0)return true
+        right++
     }
-    
     return false
 };
