@@ -38,3 +38,25 @@ var subsetsWithDup = function(nums) {
     
   return res
 };
+var subsetsWithDup = function(nums) {
+  nums.sort((a,b)=>a-b)
+  let res = [[]]
+  let size = 0
+  
+  let prev = null
+  for(let n of nums) {
+      let index = 0
+      if(prev == n)index = size
+      size = res.length
+      
+      let temp = res.slice(index)
+      for(let list of temp) {
+          let token = list.slice()
+          token.push(n)
+          res.push(token)
+      }
+      
+      prev = n
+  }
+  return res
+};
