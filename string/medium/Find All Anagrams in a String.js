@@ -118,8 +118,8 @@ var findAnagrams = function(s, p) {
     let left = 0, right =0, count = p.length
     while(right < s.length) {
         let w = s[right]
-        if(dict[w] != null) {
-            if(dict[w] > 0) count--
+        if(dict[w] > 0) {
+            count--
             dict[w]--
         }else{
             dict[w] = -1
